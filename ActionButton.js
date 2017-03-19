@@ -39,6 +39,7 @@ export default class ActionButton extends Component {
     return [
       styles.overlay,
       {
+        elevation: this.props.elevation,
         justifyContent: this.props.verticalOrientation === 'up' ? 'flex-end' : 'flex-start'
       }
     ]
@@ -54,7 +55,10 @@ export default class ActionButton extends Component {
       <View pointerEvents="box-none" style={this.getOverlayStyles()}>
         <Animated.View pointerEvents="none" style={[this.getOverlayStyles(), {
           backgroundColor: this.props.bgColor,
-          opacity: this.anim
+          opacity: this.anim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 0.3]
+          }),
         }]}>
           {this.props.backdrop}
         </Animated.View>
